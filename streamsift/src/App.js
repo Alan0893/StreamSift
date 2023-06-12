@@ -4,10 +4,10 @@ import Header from "./components/Header/Header";
 import SimpleBottomNavigation from './components/MainNav';
 import { Container } from '@mui/material';
 
-import Trending from "./pages/Trending";
-import Movies from "./pages/Movies";
-import Series from "./pages/Series";
-import Search from "./pages/Search";
+import Trending from "./pages/Trending/Trending";
+import Movies from "./pages/Movies/Movies";
+import Series from "./pages/Series/Series";
+import Search from "./pages/Search/Search";
 
 function App() {
   return (
