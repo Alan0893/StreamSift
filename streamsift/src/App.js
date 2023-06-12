@@ -1,11 +1,26 @@
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
 import Header from "./components/Header/Header";
+import SimpleBottomNavigation from './components/MainNav';
+import { Container } from '@mui/material';
 
 function App() {
   return (
-    <div className="App">
+    <BrowserRouter>
       <Header />
-    </div>
+      <div className="app"></div>
+
+      <Container>
+        <Routes>
+          <Route path='/' element={<Trending />} />
+          <Route path='/movies' element={<Movies />} />
+          <Route path='/series' element={<Series />} />
+          <Route path='/search' element={<Search />} />
+        </Routes>
+      </Container>
+
+      <SimpleBottomNavigation />
+    </BrowserRouter>
   );
 }
 
