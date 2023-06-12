@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useEffect } from 'react';
 import styled from "@mui/system/styled";
 import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
@@ -7,7 +7,8 @@ import {
 	Movie,
 	Tv,
 	Search
-} from '@mui/icons-material'
+} from '@mui/icons-material';
+import { useNavigate } from 'react-router-dom';
 
 const BottomNav = styled(BottomNavigation)({
 	width: "100%",
@@ -19,6 +20,18 @@ const BottomNav = styled(BottomNavigation)({
 
 export default function SimpleBottomNavigation() {
 	const [value, setValue] = React.useState(0);
+	const navigate = useNavigate();
+
+	useEffect(() => {
+		if(value === 0) 
+			navigate("/");
+		else if (value === 1)
+			navigate("/movies");
+		else if(value === 2)
+			navigate("/series")
+		else if(value === 3) 
+			navigate("/search")
+	}, [value, navigate])
 
 	return (
 		<BottomNav
