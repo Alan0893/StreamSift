@@ -12,7 +12,10 @@ import {
   unavailableLandscape,
 } from "../../config/config";
 import "./ContentModal.css";
-import YouTubeIcon from "@mui/icons-material/YouTube";
+import {
+  YouTube,
+  Devices
+} from "@mui/icons-material";
 import Carousel from "../Carousel/Carousel";
 
 const StyledModal = styled(Modal)({
@@ -36,6 +39,27 @@ const StyledPaper = styled("div")(({ backdropPath }) => ({
   backgroundPosition: "center",
   backgroundRepeat: "no-repeat",
 }));
+
+const ButtonContainer = styled("div")({
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  justifyContent: "center",
+  marginTop: "10px",
+  "& > *": {
+    margin: "12px",
+  },
+  "@media (min-width: 600px)": {
+    flexDirection: "row",
+    "& > *": {
+      margin: "0 12px"
+    }
+  }
+});
+
+ const StyledButton = styled(Button)({
+  width: "80%"
+ })
 
 
 export default function TransitionsModal({ children, media_type, id }) {
@@ -134,16 +158,28 @@ export default function TransitionsModal({ children, media_type, id }) {
                   <div>
                     <Carousel id={id} media_type={media_type} />
                   </div>
-
-                  <Button
-                    variant="contained"
-                    startIcon={<YouTubeIcon />}
-                    color="error"
-                    target="__blank"
-                    href={`https://www.youtube.com/watch?v=${video}`}
-                  >
-                    Watch the Trailer
-                  </Button>
+                  <ButtonContainer>
+                    <StyledButton
+                      variant="contained"
+                      startIcon={<YouTube />}
+                      color="error"
+                      target="__blank"
+                      href={`https://www.youtube.com/watch?v=${video}`}
+                    >
+                      Watch the Trailer
+                    </StyledButton>
+                    {(content && content.homepage !== "") && (
+                      <StyledButton 
+                        variant="contained"
+                        startIcon={<Devices />}
+                        color="primary"
+                        target="__blank"
+                        href={content.homepage}
+                      >
+                        Watch Now
+                      </StyledButton>
+                    )}
+                  </ButtonContainer>
                 </div>
               </div>
             </StyledPaper>
