@@ -34,7 +34,7 @@ const StyledPaper = styled("div")(({ backdropPath }) => ({
   padding: "16px 16px 24px",
   backgroundImage: backdropPath
     ? `linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.5)), url(${img_500}/${backdropPath})`
-    : `url(${unavailableLandscape})`,
+    : `linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.9)), url(${unavailableLandscape})`,
   backgroundSize: "cover",
   backgroundPosition: "center",
   backgroundRepeat: "no-repeat",
@@ -46,18 +46,16 @@ const ButtonContainer = styled("div")({
   alignItems: "center",
   justifyContent: "center",
   marginTop: "10px",
-  "& > *": {
-    margin: "12px",
-  },
+
   "@media (min-width: 600px)": {
     flexDirection: "row",
-    "& > *": {
-      margin: "0 12px"
-    }
   }
 });
 
  const StyledButton = styled(Button)({
+  marginBottom: "5px",
+  marginRight: "10px",
+  marginLeft: "10px",
   width: "80%"
  })
 

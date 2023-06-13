@@ -14,16 +14,19 @@ const Gallery = ({ id, media_type }) => {
   const items = credits.map((c) => (
     <div className="carousel">
       <p className="carousel_text">{c?.character}</p>
-      <Badge
-        badgeContent={c.popularity}
-        color={c.popularity < 30 ? "error" : c.popularity < 70 ? "secondary" : "success"}
-      />
-      <img
-        src={c.profile_path ? `${img_300}/${c.profile_path}` : noPicture}
-        alt={c?.name}
-        onDragStart={handleDragStart}
-        className="carousel_img"
-      />
+      <div className="carousel_container" sx={{ position: "relative" }}>
+        <Badge
+          badgeContent={c.popularity}
+          color={c.popularity < 30 ? "error" : c.popularity < 70 ? "secondary" : "success"}
+          sx={{ position: "absolute", top: 45, right: 25 }}
+        />
+        <img
+          src={c.profile_path ? `${img_300}/${c.profile_path}` : noPicture}
+          alt={c?.name}
+          onDragStart={handleDragStart}
+          className="carousel_img"
+        />
+      </div>
       <b className="carousel_text">{c?.name}</b>
     </div>
   ));
