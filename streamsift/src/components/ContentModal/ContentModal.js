@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { styled } from "@mui/system";
 import { 
   Modal,
-  Backdrop,
   Fade, 
   Button
 } from "@mui/material";
@@ -85,10 +84,6 @@ export default function TransitionsModal({ children, media_type, id }) {
         open={open}
         onClose={handleClose}
         closeAfterTransition
-        BackdropComponent={Backdrop}
-        BackdropProps={{
-          timeout: 500,
-        }}
       >
         <Fade in={open}>
           {content && (
