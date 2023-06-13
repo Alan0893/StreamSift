@@ -22,7 +22,7 @@ const Search = () => {
 
   const darkTheme = createTheme({
     palette: {
-      type: "dark",
+      mode: "dark",
       primary: {
         main: "#fff",
       },
