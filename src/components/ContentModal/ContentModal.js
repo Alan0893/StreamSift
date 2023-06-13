@@ -79,7 +79,6 @@ export default function TransitionsModal({ children, media_type, id }) {
     );
 
     setContent(data);
-    console.log(data);
   };
 
   const fetchVideo = async () => {
@@ -113,7 +112,7 @@ export default function TransitionsModal({ children, media_type, id }) {
         onClose={handleClose}
         closeAfterTransition
       >
-        <Fade in={open}>
+        <Fade component={content} in={open}>
           {content && (
             <StyledPaper backdropPath={content.backdrop_path}>
               <div className="ContentModal">
