@@ -35,7 +35,7 @@ const Genres = ({
     fetchGenres();
 
     return () => {
-      setGenres([]); // set to an empty array instead of an empty object
+      setGenres([]);
     };
     // eslint-disable-next-line
   }, []);
