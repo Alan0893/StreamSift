@@ -21,16 +21,22 @@ const StyledModal = styled(Modal)({
   justifyContent: "center",
 });
 
-const StyledPaper = styled("div")({
+const StyledPaper = styled("div")(({ backdropPath }) => ({
   width: "90%",
   height: "80%",
-  backgroundColor: "#39445a",
   border: "1px solid #282c34",
   borderRadius: 10,
   color: "white",
   boxShadow: "0px 5px 10px rgba(0, 0, 0, 0.5)",
   padding: "16px 16px 24px",
-});
+  backgroundImage: backdropPath
+    ? `linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.5)), url(${img_500}/${backdropPath})`
+    : `url(${unavailableLandscape})`,
+  backgroundSize: "cover",
+  backgroundPosition: "center",
+  backgroundRepeat: "no-repeat",
+}));
+
 
 export default function TransitionsModal({ children, media_type, id }) {
   const [open, setOpen] = useState(false);
@@ -51,7 +57,7 @@ export default function TransitionsModal({ children, media_type, id }) {
     );
 
     setContent(data);
-    // console.log(data);
+    console.log(data);
   };
 
   const fetchVideo = async () => {
@@ -87,7 +93,7 @@ export default function TransitionsModal({ children, media_type, id }) {
       >
         <Fade in={open}>
           {content && (
-            <StyledPaper>
+            <StyledPaper backdropPath={content.backdrop_path}>
               <div className="ContentModal">
                 <img
                   src={
@@ -96,7 +102,7 @@ export default function TransitionsModal({ children, media_type, id }) {
                       : unavailable
                   }
                   alt={content.name || content.title}
-                  className="ContentModal__portrait"
+                  className="modal_poster"
                 />
                 <img
                   src={
@@ -105,10 +111,10 @@ export default function TransitionsModal({ children, media_type, id }) {
                       : unavailableLandscape
                   }
                   alt={content.name || content.title}
-                  className="ContentModal__landscape"
+                  className="modal_backdrop"
                 />
-                <div className="ContentModal__about">
-                  <span className="ContentModal__title">
+                <div className="modal_about">
+                  <span className="modal_title">
                     {content.name || content.title} (
                     {(
                       content.first_air_date ||
@@ -121,7 +127,7 @@ export default function TransitionsModal({ children, media_type, id }) {
                     <i className="tagline">{content.tagline}</i>
                   )}
 
-                  <span className="ContentModal__description">
+                  <span className="modal_description">
                     {content.overview}
                   </span>
 
@@ -132,7 +138,7 @@ export default function TransitionsModal({ children, media_type, id }) {
                   <Button
                     variant="contained"
                     startIcon={<YouTubeIcon />}
-                    color="secondary"
+                    color="error"
                     target="__blank"
                     href={`https://www.youtube.com/watch?v=${video}`}
                   >
