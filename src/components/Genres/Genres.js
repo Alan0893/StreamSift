@@ -2,7 +2,6 @@ import { Chip } from "@mui/material";
 import axios from "axios";
 import { useEffect } from "react";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
-import { dark } from "@mui/material/styles/createPalette";
 
 const darkTheme = createTheme({
 	palette: {
