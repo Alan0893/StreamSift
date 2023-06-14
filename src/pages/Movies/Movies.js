@@ -53,7 +53,7 @@ const Movies = () => {
           ))}
       </div>
       {numOfPages > 1 && (
-        <CustomPagination setPage={setPage} numOfPages={numOfPages} />
+        <CustomPagination setPage={setPage} numOfPages={numOfPages > 500 ? 500 : numOfPages} />
       )}
     </div>
   );
