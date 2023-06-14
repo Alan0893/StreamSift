@@ -18,14 +18,14 @@ const Gallery = ({ id, media_type }) => {
         <Badge
           badgeContent={c.popularity}
           color={c.popularity < 30 ? "error" : c.popularity < 70 ? "secondary" : "success"}
-          sx={{ position: "absolute", top: 40, right: 25 }}
-        />
-        <img
-          src={c.profile_path ? `${img_300}/${c.profile_path}` : noPicture}
-          alt={c?.name}
-          onDragStart={handleDragStart}
-          className="carousel_img"
-        />
+        >
+          <img
+            src={c.profile_path ? `${img_300}/${c.profile_path}` : noPicture}
+            alt={c?.name}
+            onDragStart={handleDragStart}
+            className="carousel_img"
+          />
+        </Badge>
       </div>
       <b className="carousel_text">{c?.name}</b>
     </div>
