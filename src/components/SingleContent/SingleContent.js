@@ -1,4 +1,4 @@
-import { Badge } from "@mui/material";
+import { Badge, Chip } from "@mui/material";
 import { img_300, unavailable } from "../../config/config";
 import "./SingleContent.css";
 import ContentModal from "../ContentModal/ContentModal";
@@ -24,7 +24,19 @@ const SingleContent = ({
       />
       <b className="title">{title}</b>
       <span className="subTitle">
-        {media_type === "tv" ? "TV Series" : "Movie"}
+        
+        <Chip 
+          className="chip"
+          color="info"  
+          style={{ 
+            color: 'white',
+            fontWeight: 'bold',
+            border: '2px solid #0288d1',
+          }}
+          label={media_type === "tv" ? "TV Series" : "Movie"}
+          variant="outlined"
+          size="small"
+        />
         <span className="subTitle">{date}</span>
       </span>
     </ContentModal>

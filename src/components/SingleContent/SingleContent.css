@@ -18,6 +18,9 @@
   background-color: rgb(230, 230, 230);
   color: black;
 }
+.media:hover .chip {
+  color: black !important;
+}
 @media (max-width: 550px) {
   .media {
     width: 46%;
