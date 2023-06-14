@@ -1,9 +1,9 @@
 import {
-  Button,
   Tab,
   Tabs,
   TextField,
   ThemeProvider,
+  InputAdornment
 } from "@mui/material";
 import { createTheme } from "@mui/material/styles"
 import "./Search.css";
@@ -20,12 +20,11 @@ const Search = () => {
   const [content, setContent] = useState([]);
   const [numOfPages, setNumOfPages] = useState();
 
+  const [isTyping, setIsTyping] = useState(false); // Track typing state
+
   const darkTheme = createTheme({
     palette: {
       mode: "dark",
-      primary: {
-        main: "#fff",
-      },
     },
   });
 
@@ -38,7 +37,6 @@ const Search = () => {
       );
       setContent(data.results);
       setNumOfPages(data.total_pages);
-      // console.log(data);
     } catch (error) {
       console.error(error);
     }
@@ -50,6 +48,26 @@ const Search = () => {
     // eslint-disable-next-line
   }, [type, page]);
 
+  const handleSearchSubmit = () => {
+    fetchSearch();
+  };
+
+  const handleInputChange = (e) => {
+    setSearchText(e.target.value);
+    setIsTyping(e.target.value.trim() !== "");
+    setPage(1); // Reset page number when the search text changes
+  };
+
+  useEffect(() => {
+    const delayDebounceFn = setTimeout(() => {
+      if (searchText && isTyping) {
+        fetchSearch();
+      }
+    }, 300);
+
+    return () => clearTimeout(delayDebounceFn);
+  }, [searchText, isTyping]);
+
   return (
     <div>
       <ThemeProvider theme={darkTheme}>
@@ -58,16 +76,38 @@ const Search = () => {
             style={{ flex: 1 }}
             className="searchBox"
             label="Search"
-            variant="filled"
-            onChange={(e) => setSearchText(e.target.value)}
+            variant="outlined"
+            placeholder="search"
+            color="primary"
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  {!isTyping && (
+                    <div onClick={handleSearchSubmit}>
+                      <SearchIcon />
+                    </div>
+                  )}
+                </InputAdornment>
+              ),
+              endAdornment: (
+                <InputAdornment position="end">
+                  {isTyping && (
+                    <div
+                      onClick={handleSearchSubmit}
+                      style={{ cursor: "pointer" }}
+                    >
+                      <SearchIcon />
+                    </div>
+                  )}
+                </InputAdornment>
+              ),
+              classes: {
+                root: "inputRoot",
+                adornedStart: "inputAdornedStart",
+              },
+            }}
+            onChange={handleInputChange}
           />
-          <Button
-            onClick={fetchSearch}
-            variant="contained"
-            style={{ marginLeft: 10 }}
-          >
-            <SearchIcon fontSize="large" />
-          </Button>
         </div>
         <Tabs
           value={type}
@@ -97,12 +137,12 @@ const Search = () => {
               vote_average={c.vote_average}
             />
           ))}
-        {searchText &&
-          !content &&
-          (type ? <h2>No Series Found</h2> : <h2>No Movies Found</h2>)}
+          {searchText && content.length === 0 && (
+            type === 0 ? <h2>No Movies Found</h2> : <h2>No Series Found</h2>
+          )}
       </div>
       {numOfPages > 1 && (
-        <CustomPagination setPage={setPage} numOfPages={numOfPages} />
+        <CustomPagination setPage={setPage} numOfPages={numOfPages > 500 ? 500 : numOfPages} />
       )}
     </div>
   );

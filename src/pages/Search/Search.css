@@ -2,3 +2,7 @@
   display: flex;
   margin: 15px 0;
 }
+
+.searchBox .MuiOutlinedInput-root {
+  border-radius: 23px;
+}
