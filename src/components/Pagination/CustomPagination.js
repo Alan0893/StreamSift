@@ -3,12 +3,14 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 
 const darkTheme = createTheme({
 	palette: {
-		mode: "dark"
+		text: {
+			primary: "white",
+		}
 	}
 })
 
 const CustomPagination = ({ setPage, numOfPages=10 }) => {
-	const handlePageChange = (page) => {
+	const handlePageChange = (event, page) => {
 		setPage(page);
 		window.scroll(0, 0);
 	}
@@ -25,9 +27,7 @@ const CustomPagination = ({ setPage, numOfPages=10 }) => {
 			<ThemeProvider theme={darkTheme}>
 				<Pagination 
 					count={numOfPages} 
-					onChange={(e) => handlePageChange(e.target.textContent)}
-					hideNextButton
-					hidePrevButton
+					onChange={handlePageChange}
 					color="primary"
 				/>
 			</ThemeProvider>
