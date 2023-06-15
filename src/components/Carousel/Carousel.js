@@ -16,7 +16,7 @@ const Gallery = ({ id, media_type }) => {
       <p className="carousel_text">{c?.character}</p>
       <div className="carousel_container" sx={{ position: "relative" }}>
         <Badge
-          badgeContent={c.popularity}
+          badgeContent={(c.popularity).toFixed(1)}
           color={c.popularity < 30 ? "error" : c.popularity < 70 ? "secondary" : "success"}
         >
           <img
