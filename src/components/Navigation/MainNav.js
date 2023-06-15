@@ -3,7 +3,7 @@ import styled from "@mui/system/styled";
 import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 import {
-	Whatshot,
+	TrendingUp,
 	Movie,
 	Tv,
 	Search
@@ -46,7 +46,7 @@ export default function SimpleBottomNavigation() {
 			>
 				<BottomNavigationAction 
 					label="Trending" 
-					icon={<Whatshot />} 
+					icon={<TrendingUp />} 
 				/>
 				<BottomNavigationAction 
 					label="Movies" 
