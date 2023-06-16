@@ -18,12 +18,15 @@
   object-fit: contain;
   border-radius: 10px;
 }
-
 .modal_backdrop {
   object-fit: contain;
   border-radius: 10px;
 }
-
+.modal_profile {
+  object-fit: contain;
+  border-radius: 10px;
+  height: 40%;
+}
 .modal_about {
   padding: 10px;
   width: 95%;
@@ -74,6 +77,9 @@
     width: 38%;
   }
   .modal_backdrop {
+    display: none;
+  }
+  .modal_profile {
     display: none;
   }
   .modal_about {

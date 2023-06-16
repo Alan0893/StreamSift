@@ -3,7 +3,6 @@ import { styled } from "@mui/system";
 import { 
   Modal,
   Fade, 
-  Button
 } from "@mui/material";
 import {
   img_500,
@@ -11,11 +10,7 @@ import {
   unavailableLandscape,
 } from "../../config/config";
 import "./ContentModal.css";
-import {
-  YouTube,
-  Devices
-} from "@mui/icons-material";
-import Carousel from "../Carousel/ActorCarousel";
+import ActorCarousel from "../Carousel/ActorCarousel";
 
 const StyledModal = styled(Modal)({
   display: "flex",
@@ -39,29 +34,11 @@ const StyledPaper = styled("div")(({ backdropPath }) => ({
   backgroundRepeat: "no-repeat",
 }));
 
-const ButtonContainer = styled("div")({
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "center",
-  justifyContent: "center",
-  marginTop: "10px",
-
-  "@media (min-width: 600px)": {
-    flexDirection: "row",
-  }
-});
-
- const StyledButton = styled(Button)({
-  marginBottom: "5px",
-  marginRight: "10px",
-  marginLeft: "10px",
-  width: "80%"
- })
-
 
 export default function TransitionsModal({ children, data, id }) {
   const [open, setOpen] = useState(false);
   const [content, setContent] = useState();
+  console.log(data)
 
   const handleOpen = () => {
     setOpen(true);
@@ -79,6 +56,28 @@ export default function TransitionsModal({ children, data, id }) {
     fetchData();
     // eslint-disable-next-line
   }, []);
+
+  const calculateAge = (birthday, deathday) => {
+    if (birthday) {
+      const birthDate = new Date(birthday);
+      const currentDate = deathday ? new Date(deathday) : new Date();
+
+      let age = currentDate.getFullYear() - birthDate.getFullYear();
+
+      if (
+        currentDate.getMonth() < birthDate.getMonth() ||
+        (currentDate.getMonth() === birthDate.getMonth() &&
+          currentDate.getDate() < birthDate.getDate())
+      ) {
+        age--;
+      }
+
+      return age;
+    }
+
+    return null; // Return null if birthday is not available
+  };
+
 
   return (
     <>
@@ -117,31 +116,32 @@ export default function TransitionsModal({ children, data, id }) {
                 />
                 <img 
                   src={
-                    content.known_for.length > 0
-                      ? `${img_500}/${content.known_for[0].backdrop_path}`
+                    content.profile_path
+                      ? `${img_500}/${content.profile_path}`
                       : unavailable
                   }
                   alt={content.name}
-                  className="modal_backdrop"
+                  className="modal_profile"
                 />
                 <div className="modal_about">
                   <span className="modal_title">
-                    {content.name}(
-                    {(
-                      content.details.birthday || "----"
-                    ).substring(0, 4)}
-                    )
+                    {content.name} {
+                      content.details.birthday 
+                      ? `(${calculateAge(content.details.birthday, content.details.deathday)})` 
+                      : ''
+                    }
                   </span>
+
                   {content.details.place_of_birth && (
                     <i className="tagline">{content.details.place_of_birth}</i>
                   )}
 
-                  <span className="modal-description">
-                    {content.biography}
+                  <span className="modal_description">
+                    {content.details.biography}
                   </span>
 
                   <div>
-                    <Carousel id={id} media={data.known_for} />
+                    <ActorCarousel id={id} media={data.known_for} />
                   </div>
                 </div>
               </div>
