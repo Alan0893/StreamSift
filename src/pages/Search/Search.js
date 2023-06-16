@@ -12,6 +12,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import CustomPagination from "../../components/Pagination/CustomPagination";
 import SingleContent from "../../components/SingleContent/SingleContent";
+import { useLocation } from "react-router-dom";
 
 const Search = () => {
   const [type, setType] = useState(0);
@@ -22,11 +23,21 @@ const Search = () => {
 
   const [isTyping, setIsTyping] = useState(false); // Track typing state
 
+  const location = useLocation();
+
   const darkTheme = createTheme({
     palette: {
       mode: "dark",
     },
   });
+
+  useEffect(() => {
+		const searchParams = new URLSearchParams(location.search);
+		const mediaName = searchParams.get("name");
+		if (mediaName) {
+			setSearchText(mediaName);
+		}
+	}, [location.search]);
 
   const fetchSearch = async () => {
     try {
@@ -46,7 +57,7 @@ const Search = () => {
     window.scroll(0, 0);
     fetchSearch();
     // eslint-disable-next-line
-  }, [type, page]);
+  }, [type, page, content]);
 
   const handleSearchSubmit = () => {
     fetchSearch();

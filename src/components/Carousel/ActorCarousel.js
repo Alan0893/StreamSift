@@ -4,14 +4,25 @@ import "react-alice-carousel/lib/alice-carousel.css";
 import { img_300, noPicture } from "../../config/config";
 import "./Carousel.css";
 import { Badge, Chip } from "@mui/material";
+import { useNavigate  } from "react-router-dom";
 
 const handleDragStart = (e) => e.preventDefault();
 
 const Gallery2 = ({ media }) => {
   const [credits, setCredits] = useState([]);
 
+  const navigate = useNavigate();
+
+  const handleMovieClick = (media) => {
+    navigate(`/search?name=${media.name || media.title}`);
+  }
+
   const items = credits.map((c) => (
-    <div className="carousel">
+    <div 
+      className="carousel"
+      onClick={() => handleMovieClick(c)}
+      key={c.id}
+    >
       <div className="chip-containter">
       <Chip 
         className="chip"
