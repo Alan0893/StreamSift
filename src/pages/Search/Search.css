@@ -6,3 +6,26 @@
 .searchBox .MuiOutlinedInput-root {
   border-radius: 23px;
 }
+
+.center-tabs {
+  display: flex;
+  justify-content: center;
+}
+
+.center-tabs {
+  display: flex;
+  justify-content: center;
+}
+
+.center-tabs .MuiTabs-root {
+  width: 100%;
+  justify-content: center;
+}
+
+.center-tabs .MuiTabs-flexContainer {
+  justify-content: center;
+}
+
+.center-tabs .MuiTab-root {
+  width: 50%;
+}

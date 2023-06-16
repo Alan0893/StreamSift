@@ -101,7 +101,7 @@ const Actor = () => {
 						className="searchBox"
 						label="Search"
 						variant="outlined"
-						placeholder="actor"
+						placeholder="search person"
 						color="secondary"
 						InputProps={{
 							startAdornment: (
@@ -150,7 +150,7 @@ const Actor = () => {
 					))	
 				}
 				{searchText && content.length === 0 && (
-            		<h2>No Actor/Actress Found</h2>
+            		<h2>Person Not Found</h2>
           		)}
 			</div>
 			{numOfPages > 1 && (

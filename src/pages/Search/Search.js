@@ -77,7 +77,7 @@ const Search = () => {
             className="searchBox"
             label="Search"
             variant="outlined"
-            placeholder="search"
+            placeholder="search movie/series"
             color="primary"
             InputProps={{
               startAdornment: (
@@ -109,20 +109,22 @@ const Search = () => {
             onChange={handleInputChange}
           />
         </div>
-        <Tabs
-          value={type}
-          indicatorColor="primary"
-          textColor="primary"
-          onChange={(event, newValue) => {
-            setType(newValue);
-            setPage(1);
-          }}
-          style={{ paddingBottom: 5 }}
-          aria-label="disabled tabs example"
-        >
-          <Tab style={{ width: "50%" }} label="Search Movies" />
-          <Tab style={{ width: "50%" }} label="Search TV Series" />
-        </Tabs>
+        <div className="center-tabs">
+          <Tabs
+            value={type}
+            indicatorColor="primary"
+            textColor="primary"
+            onChange={(event, newValue) => {
+              setType(newValue);
+              setPage(1);
+            }}
+            style={{ paddingBottom: 5 }}
+            aria-label="disabled tabs example"
+          >
+            <Tab style={{ width: "50%" }} label="Search Movies" />
+            <Tab style={{ width: "50%" }} label="Search TV Series" />
+          </Tabs>
+        </div>
       </ThemeProvider>
       <div className="trending">
         {content &&
