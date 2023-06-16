@@ -1,4 +1,3 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import AliceCarousel from "react-alice-carousel";
 import "react-alice-carousel/lib/alice-carousel.css";
@@ -8,26 +7,33 @@ import { Badge } from "@mui/material";
 
 const handleDragStart = (e) => e.preventDefault();
 
-const Gallery = ({ id, media_type }) => {
+const Gallery2 = ({ media }) => {
   const [credits, setCredits] = useState([]);
 
   const items = credits.map((c) => (
     <div className="carousel">
-      <p className="carousel_text">{c?.character}</p>
+      <p className="carousel_text">{c?.media_type}</p>
       <div className="carousel_container" sx={{ position: "relative" }}>
         <Badge
-          badgeContent={(c.popularity).toFixed(1)}
-          color={c.popularity < 30 ? "error" : c.popularity < 70 ? "secondary" : "success"}
+          badgeContent={(c.vote_average).toFixed(1)}
+          color={c.vote_average > 6 ? "primary" : "secondary"}
         >
           <img
-            src={c.profile_path ? `${img_300}/${c.profile_path}` : noPicture}
+            src={c.poster_path ? `${img_300}/${c.poster_path}` : noPicture}
             alt={c?.name}
             onDragStart={handleDragStart}
             className="carousel_img"
           />
         </Badge>
       </div>
-      <b className="carousel_text">{c?.name}f</b>
+      <b className="carousel_text">
+        {c?.title} (
+          {(
+            c.first_air_date ||
+            c.release_date ||
+            "-----"
+          ).substring(0, 4)})
+        </b>
     </div>
   ));
 
@@ -44,10 +50,7 @@ const Gallery = ({ id, media_type }) => {
   };
 
   const fetchCredits = async () => {
-    const { data } = await axios.get(
-      `https://api.themoviedb.org/3/${media_type}/${id}/credits?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`
-    );
-    setCredits(data.cast);
+    setCredits(media);
   };
 
   useEffect(() => {
@@ -70,4 +73,4 @@ const Gallery = ({ id, media_type }) => {
   );
 };
 
-export default Gallery;
+export default Gallery2;

@@ -6,7 +6,8 @@ import {
 	TrendingUp,
 	Movie,
 	Tv,
-	Search
+	Search,
+	TheaterComedy
 } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 import { ThemeProvider, createTheme } from "@mui/material/styles";
@@ -30,10 +31,11 @@ export default function SimpleBottomNavigation() {
 	const navigate = useNavigate();
 
 	useEffect(() => {
-		if(value === 0) navigate("/");
+		if (value === 0) navigate("/");
 		else if (value === 1) navigate("/movies");
-		else if(value === 2) navigate("/series")
-		else if(value === 3) navigate("/search")
+		else if (value === 2) navigate("/series");
+		else if (value === 3) navigate("/search");
+		else if (value === 4) navigate("/actor");
 	}, [value, navigate])
 
 	return (
@@ -59,6 +61,10 @@ export default function SimpleBottomNavigation() {
 				<BottomNavigationAction 
 					label="Search" 
 					icon={<Search />} 
+				/>
+				<BottomNavigationAction
+					label="Actor"
+					icon={<TheaterComedy />}
 				/>
 			</BottomNav>
 		</ThemeProvider>
