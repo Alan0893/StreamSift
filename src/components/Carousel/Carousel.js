@@ -5,14 +5,25 @@ import "react-alice-carousel/lib/alice-carousel.css";
 import { img_300, noPicture } from "../../config/config";
 import "./Carousel.css";
 import { Badge } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const handleDragStart = (e) => e.preventDefault();
 
 const Gallery = ({ id, media_type }) => {
   const [credits, setCredits] = useState([]);
+  
+  const navigate = useNavigate();
+
+  const handleActorClick = (actor) => {
+    navigate(`/actor?name=${encodeURIComponent(actor.name)}`);
+  };
 
   const items = credits.map((c) => (
-    <div className="carousel">
+    <div 
+      className="carousel"
+      onClick={() => handleActorClick(c)}
+      key={c.id}
+    >
       <p className="carousel_text">{c?.character}</p>
       <div className="carousel_container" sx={{ position: "relative" }}>
         <Badge

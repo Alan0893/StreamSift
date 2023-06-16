@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import CustomPagination from "../../components/Pagination/CustomPagination";
 import SingleContent from "../../components/SingleContent/SingleContent";
+import { useLocation } from "react-router-dom";
 
 const Actor = () => {
 	const [searchText, setSearchText] = useState("");
@@ -19,11 +20,22 @@ const Actor = () => {
 
 	const [isTyping, setIsTyping] = useState(false);
 
+	const location = useLocation();
+
 	const darkTheme = createTheme({
 		palette: {
 			mode: "dark"
 		},
 	});
+
+	useEffect(() => {
+		const searchParams = new URLSearchParams(location.search);
+		const actorName = searchParams.get("name");
+		if (actorName) {
+			setSearchText(actorName);
+		}
+	}, [location.search]);
+
 
 	const fetchSearch = async () => {
 		try {
