@@ -26,3 +26,8 @@
   height: 135px; 
   width: 90px;
 }
+
+.chip-container {
+  display: flex;
+  justify-content: center;
+}

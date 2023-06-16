@@ -3,7 +3,7 @@ import AliceCarousel from "react-alice-carousel";
 import "react-alice-carousel/lib/alice-carousel.css";
 import { img_300, noPicture } from "../../config/config";
 import "./Carousel.css";
-import { Badge } from "@mui/material";
+import { Badge, Chip } from "@mui/material";
 
 const handleDragStart = (e) => e.preventDefault();
 
@@ -12,7 +12,25 @@ const Gallery2 = ({ media }) => {
 
   const items = credits.map((c) => (
     <div className="carousel">
-      <p className="carousel_text">{c?.media_type}</p>
+      <div className="chip-containter">
+      <Chip 
+        className="chip"
+        color="info"  
+        style={{ 
+          color: 'white',
+          fontWeight: 'bold',
+          border: '2px solid #0288d1',
+          marginTop: 'auto',
+          marginBottom: '15px',
+          whiteSpace: 'nowrap',
+          width: '50%',
+          textAlign: 'center',
+        }}
+        label={c?.media_type === "tv" ? "TV Series" : "Movie"}
+        variant="outlined"
+        size="small"
+      />
+      </div>
       <div className="carousel_container" sx={{ position: "relative" }}>
         <Badge
           badgeContent={(c.vote_average).toFixed(1)}

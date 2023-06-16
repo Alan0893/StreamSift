@@ -139,7 +139,10 @@ export default function TransitionsModal({ children, data, id }) {
                   <span className="modal_description">
                     {content.details.biography}
                   </span>
-
+                  
+                  {content.details.place_of_birth && (
+                    <b className="known_for">Known For:</b>
+                  )}
                   <div>
                     <ActorCarousel id={id} media={data.known_for} />
                   </div>

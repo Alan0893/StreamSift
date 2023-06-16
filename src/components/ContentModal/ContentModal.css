@@ -49,6 +49,11 @@
   padding-bottom: 8px;
   align-self: center;
 }
+.known_for {
+  margin-top: 10px;
+  padding-bottom: 8px;
+  align-self: center;
+}
 
 .modal_description {
   display: flex;
