@@ -38,7 +38,6 @@ const StyledPaper = styled("div")(({ backdropPath }) => ({
 export default function TransitionsModal({ children, data, id }) {
   const [open, setOpen] = useState(false);
   const [content, setContent] = useState();
-  console.log(data)
 
   const handleOpen = () => {
     setOpen(true);
