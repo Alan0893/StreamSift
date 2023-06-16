@@ -9,7 +9,7 @@ import {
 	Search,
 	TheaterComedy
 } from '@mui/icons-material';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 
 const darkTheme = createTheme({
@@ -27,16 +27,26 @@ const BottomNav = styled(BottomNavigation)({
 })
 
 export default function SimpleBottomNavigation() {
-	const [value, setValue] = React.useState(0);
 	const navigate = useNavigate();
+	const location = useLocation();
 
 	useEffect(() => {
-		if (value === 0) navigate("/");
-		else if (value === 1) navigate("/movies");
-		else if (value === 2) navigate("/series");
-		else if (value === 3) navigate("/search");
-		else if (value === 4) navigate("/actor");
-	}, [value, navigate])
+		if (location.pathname === "/") setValue(0);
+		else if (location.pathname === "/movies") setValue(1);
+		else if (location.pathname === "/series") setValue(2);
+		else if (location.pathname === "/search") setValue(3);
+		else if (location.pathname === "/actor") setValue(4);
+	}, [location.pathname]);
+
+	const handleNavigation = (newValue) => {
+		if (newValue === 0) navigate("/");
+		else if (newValue === 1) navigate("/movies");
+		else if (newValue === 2) navigate("/series");
+		else if (newValue === 3) navigate("/search");
+		else if (newValue === 4) navigate("/actor");
+	};
+
+	const [value, setValue] = React.useState(0);
 
 	return (
 		<ThemeProvider theme={darkTheme}>
