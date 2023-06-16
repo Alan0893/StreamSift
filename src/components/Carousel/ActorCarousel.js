@@ -45,7 +45,7 @@ const Gallery2 = ({ media }) => {
         </Badge>
       </div>
       <b className="carousel_text">
-        {c?.title} (
+        {c?.title || c?.name} (
           {(
             c.first_air_date ||
             c.release_date ||

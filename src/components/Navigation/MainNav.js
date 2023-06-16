@@ -66,7 +66,7 @@ export default function SimpleBottomNavigation() {
 					icon={<Movie />}
 				/>
 				<BottomNavigationAction 
-					label="TV Series" 
+					label="Series" 
 					icon={<Tv />} 
 				/>
 				<BottomNavigationAction 
