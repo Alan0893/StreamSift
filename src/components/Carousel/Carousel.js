@@ -27,7 +27,7 @@ const Gallery = ({ id, media_type }) => {
           />
         </Badge>
       </div>
-      <b className="carousel_text">{c?.name}f</b>
+      <b className="carousel_text">{c?.name}</b>
     </div>
   ));
 
