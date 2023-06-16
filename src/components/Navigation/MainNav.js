@@ -54,6 +54,7 @@ export default function SimpleBottomNavigation() {
 				value={value}
 				onChange={(event, newValue) => {
 					setValue(newValue);
+					handleNavigation(newValue);
 				}}
 			>
 				<BottomNavigationAction 
