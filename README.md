@@ -1,1 +1,2 @@
 # StreamSift
+Harnesses the capabilities of the [TMDB](https://developer.themoviedb.org/reference/intro/getting-started) (The Movie Database) API to deliver timely and accurate information on popular movies and series. Users can access up-to-date details, including movie/show descriptions, cast members, and character information. Utilizes the TMDB API to target searches for specific movie or series queries.
