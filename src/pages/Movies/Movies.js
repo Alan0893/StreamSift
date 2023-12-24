@@ -14,9 +14,17 @@ const Movies = () => {
   const genreforURL = useGenre(selectedGenres);
 
   const fetchMovies = async () => {
-    const { data } = await axios.get(
-      `https://api.themoviedb.org/3/trending/movie/day?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${page}&with_genres=${genreforURL}`
-    );
+    let apiUrl;
+
+    if (selectedGenres.length > 0) {
+      // Use the discover endpoint when genres are selected
+      apiUrl = `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${page}&with_genres=${genreforURL}`;
+    } else {
+      // Use the trending endpoint when no genres are selected
+      apiUrl = `https://api.themoviedb.org/3/trending/movie/day?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${page}`;
+    }
+
+    const { data } = await axios.get(apiUrl);
     setContent(data.results);
     setNumOfPages(data.total_pages);
   };

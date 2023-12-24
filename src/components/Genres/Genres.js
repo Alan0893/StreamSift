@@ -42,7 +42,7 @@ const Genres = ({
     fetchGenres();
 
     return () => {
-      setGenres([]);
+      setGenres({});
     };
     // eslint-disable-next-line
   }, []);
